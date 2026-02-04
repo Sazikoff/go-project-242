@@ -2,22 +2,22 @@ package pathsize
 
 import "os"
 
-func GetSize(path string) int64 {
+func GetSize(path string) (int64, error) {
     info, err := os.Lstat(path)
     if err != nil {
-        return 0
+        return 0, err
     }
 
     if !info.IsDir() {
-        return info.Size()
+        return info.Size(), nil
     }
 
     entries, err := os.ReadDir(path)
     if err != nil {
-        return 0
+        return 0, err
     }
 
-    var total int64 = 0
+    var total int64
 
     for _, entry := range entries {
         if entry.IsDir() {
@@ -32,7 +32,7 @@ func GetSize(path string) int64 {
         total += fileInfo.Size()
     }
 
-    return total
+    return total, nil
 }
 
 

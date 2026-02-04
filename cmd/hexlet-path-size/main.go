@@ -18,7 +18,7 @@ func main() {
 			}
 
 			path := cmd.Args().Get(0)
-			size := pathsize.GetSize(path)
+			size,_ := pathsize.GetSize(path)
 
 			fmt.Printf("%dB	%s\n", size, path)
 			// cwd,_ := os.Getwd()

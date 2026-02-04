@@ -5,3 +5,9 @@ build:
 
 run:
 	go run ./cmd/hexlet-path-size/
+
+test:
+	go test -v ./internal/pathsize/
+
+lint:
+	golangci-lint run
