@@ -19,6 +19,15 @@ func main() {
                 Value: false,
                 Usage: "human-readable sizes (auto-select unit)",
             },
+			
+            &cli.BoolFlag{
+                Name:  "all",
+				Aliases: []string{"a"},
+                Value: false,
+                Usage: "include hidden files and directories",
+            },
+			
+
 		},
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			if cmd.NArg() == 0 {
@@ -27,9 +36,9 @@ func main() {
 
 			
 			path := cmd.Args().Get(0)
-			size,_ := pathsize.GetSize(path)
+			size,_ := pathsize.GetSize(path, cmd.Bool("all"))
 
-			fmt.Printf("%dB	%s\n", size, path)
+			// fmt.Printf("%dB	%s\n", size, path)
 			
 			size_str := pathsize.FormatSize(size, cmd.Bool("human"))
 
