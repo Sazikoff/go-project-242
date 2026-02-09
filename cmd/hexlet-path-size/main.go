@@ -12,6 +12,8 @@ import (
 
 func main() {
 	cmd := &cli.Command{
+		Usage: "print size of a file or directory; supports -r (recursive), -H (human-readable), -a (include hidden)",
+		
 		Flags: []cli.Flag{
             &cli.BoolFlag{
                 Name:  "human",
@@ -27,6 +29,13 @@ func main() {
                 Usage: "include hidden files and directories",
             },
 			
+            &cli.BoolFlag{
+                Name:  "recursive",
+				Aliases: []string{"r"},
+                Value: false,
+                Usage: "recursive size of directories",
+            },
+			
 
 		},
 		Action: func(ctx context.Context, cmd *cli.Command) error {
@@ -36,7 +45,7 @@ func main() {
 
 			
 			path := cmd.Args().Get(0)
-			size,_ := pathsize.GetSize(path, cmd.Bool("all"))
+			size,_ := pathsize.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
 
 			// fmt.Printf("%dB	%s\n", size, path)
 			
