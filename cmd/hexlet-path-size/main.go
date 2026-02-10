@@ -47,13 +47,11 @@ func main() {
 			path := cmd.Args().Get(0)
 			size,_ := pathsize.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
 
-			// fmt.Printf("%dB	%s\n", size, path)
 			
 			size_str := pathsize.FormatSize(size, cmd.Bool("human"))
 
 			fmt.Printf("%s	%s\n", size_str, path)
-			// cwd,_ := os.Getwd()
-			// fmt.Println(cwd)
+
 			return nil
 		},
 	}

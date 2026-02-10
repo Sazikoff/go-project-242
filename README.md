@@ -26,3 +26,7 @@ make lint
 ```bash
 make test
 ```
+
+## Demo
+
+[![CLI Demo]()]()
