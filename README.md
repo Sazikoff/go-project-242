@@ -29,4 +29,4 @@ make test
 
 ## Demo
 
-[![CLI Demo](https://asciinema.org/a/fCmARYcrT0xBHMdN.svg)](https://asciinema.org/a/fCmARYcrT0xBHMdN)
+[![CLI Demo]( https://asciinema.org/a/PyQwph8h9ML4998l.svg)]( https://asciinema.org/a/PyQwph8h9ML4998l)
