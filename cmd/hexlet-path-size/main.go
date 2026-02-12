@@ -1,7 +1,7 @@
 package main
 
 import (
-	"code/internal/pathsize"
+	"code"
 	"context"
 	"fmt"
 	"log"
@@ -45,10 +45,10 @@ func main() {
 
 			
 			path := cmd.Args().Get(0)
-			size,_ := pathsize.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
+			size,_ := code.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
 
 			
-			size_str := pathsize.FormatSize(size, cmd.Bool("human"))
+			size_str := code.FormatSize(size, cmd.Bool("human"))
 
 			fmt.Printf("%s	%s\n", size_str, path)
 
