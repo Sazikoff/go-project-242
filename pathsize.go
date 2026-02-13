@@ -1,3 +1,4 @@
+// Package code provides functionality for calculating file and directory sizes
 package code
 
 import (

@@ -1,3 +1,4 @@
+// Package main implements the hexlet-path-size CLI application.
 package main
 
 import (
@@ -38,7 +39,7 @@ func main() {
 			
 
 		},
-		Action: func(ctx context.Context, cmd *cli.Command) error {
+		Action: func(_ context.Context, cmd *cli.Command) error {
 			if cmd.NArg() == 0 {
 				return fmt.Errorf("path is required")
 			}
@@ -48,9 +49,9 @@ func main() {
 			size,_ := code.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
 
 			
-			size_str := code.FormatSize(size, cmd.Bool("human"))
+			sizeStr := code.FormatSize(size, cmd.Bool("human"))
 
-			fmt.Printf("%s	%s\n", size_str, path)
+			fmt.Printf("%s	%s\n", sizeStr, path)
 
 			return nil
 		},
