@@ -28,7 +28,7 @@ func TestGetPathSize_Dir(t *testing.T) {
 func TestFormatSize_NoHidden(t *testing.T) {
 	path := "testdata/.hidden_dir"
 
-	size, err := GetPathSize(path, true, false, false)
+	size, err := GetPathSize(path, true, false, true)
 
 	require.NoError(t, err)
 	require.Equal(t, "6B", size)
@@ -62,7 +62,7 @@ func TestFormatSize_Hidden_NoRecursive(t *testing.T) {
 func TestFormatSize_NoHidden_Recursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, false, true, false)
+	size, err := GetPathSize(path, true, false, false)
 	require.NoError(t, err)
 	require.Equal(t, "6B", size)
 }
@@ -70,7 +70,7 @@ func TestFormatSize_NoHidden_Recursive(t *testing.T) {
 func TestFormatSize_Hidden_Recursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, true, true, false)
+	size, err := GetPathSize(path, true, false, true)
 	require.NoError(t, err)
 	require.Equal(t, "18B", size)
 }
