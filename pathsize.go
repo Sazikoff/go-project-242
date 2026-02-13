@@ -13,17 +13,17 @@ import (
 // If path is a directory, it sums file sizes inside.
 // Flag a includes hidden files.
 // Flag r enables recursive traversal.
-func GetPathSize(path string, a bool, r bool, h bool) (string, error) {
+func GetPathSize(path string, r bool, h bool, a bool) (string, error) {
 
 	var total int64
 
-	err := filepath.WalkDir(path, func(_ string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(path, func(currentPath string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
 		// пропускаем скрытые
-		if !a && strings.HasPrefix(d.Name(), ".") { // && currentPath != path
+		if !a && strings.HasPrefix(d.Name(), ".") && currentPath != path {
 			if d.IsDir() {
 				// не просто пропускаем дир, а говорим, чтоб не входил
 				return filepath.SkipDir
@@ -33,7 +33,7 @@ func GetPathSize(path string, a bool, r bool, h bool) (string, error) {
 		}
 
 		// рекурсия выключена, не заходим в поддиректории
-		if !r && d.IsDir() {
+		if !r && d.IsDir() && currentPath != path {
 			return filepath.SkipDir
 		}
 

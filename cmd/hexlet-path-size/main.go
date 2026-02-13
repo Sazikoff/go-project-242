@@ -43,7 +43,7 @@ func main() {
 			}
 
 			path := cmd.Args().Get(0)
-			size, _ := code.GetPathSize(path, cmd.Bool("all"), cmd.Bool("recursive"), cmd.Bool("human"))
+			size, _ := code.GetPathSize(path, cmd.Bool("recursive"), cmd.Bool("human"), cmd.Bool("all"))
 
 			fmt.Printf("%s	%s\n", size, path)
 
