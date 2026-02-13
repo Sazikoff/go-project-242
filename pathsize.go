@@ -17,13 +17,13 @@ func GetPathSize(path string, a bool, r bool, h bool) (string, error) {
 
 	var total int64
 
-	err := filepath.WalkDir(path, func(currentPath string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(path, func(_ string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
 		// пропускаем скрытые
-		if !a && strings.HasPrefix(d.Name(), ".") && currentPath != path {
+		if !a && strings.HasPrefix(d.Name(), ".") { // && currentPath != path
 			if d.IsDir() {
 				// не просто пропускаем дир, а говорим, чтоб не входил
 				return filepath.SkipDir
@@ -33,7 +33,7 @@ func GetPathSize(path string, a bool, r bool, h bool) (string, error) {
 		}
 
 		// рекурсия выключена, не заходим в поддиректории
-		if !r && d.IsDir() && currentPath != path {
+		if !r && d.IsDir() {
 			return filepath.SkipDir
 		}
 
@@ -66,7 +66,7 @@ func FormatSize(size int64, h bool) string {
 	}
 
 	s := fmt.Sprintf("%.1f", i)
-	s = strings.TrimSuffix(s, ".0")
+	// s = strings.TrimSuffix(s, ".0")
 
 	switch count {
 	case 1:
