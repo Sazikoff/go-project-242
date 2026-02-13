@@ -46,7 +46,7 @@ func main() {
 
 			
 			path := cmd.Args().Get(0)
-			size,_ := code.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
+			size,_ := code.GetPathSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
 
 			
 			sizeStr := code.FormatSize(size, cmd.Bool("human"))

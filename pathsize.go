@@ -8,12 +8,12 @@ import (
 	"strings"
 )
 
-// GetSize calculates the total size of a file or directory.
+// GetPathSize calculates the total size of a file or directory.
 // If path is a file, it returns its size.
 // If path is a directory, it sums file sizes inside.
 // Flag a includes hidden files.
 // Flag r enables recursive traversal.
-func GetSize(path string, a bool, r bool) (int64, error) {
+func GetPathSize(path string, a bool, r bool) (int64, error) {
 
 	var total int64
 
