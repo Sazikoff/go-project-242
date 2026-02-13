@@ -10,67 +10,67 @@ import (
 func TestGetPathSize_File(t *testing.T) {
 	path := "testdata/file.txt"
 
-	size, err := GetPathSize(path, true, false)
+	size, err := GetPathSize(path, true, false, false)
 
 	require.NoError(t, err)
-	require.Equal(t, int64(3), size)
+	require.Equal(t, "3B", size)
 }
 
 func TestGetPathSize_Dir(t *testing.T) {
 	path := "testdata/dir"
 
-	size, err := GetPathSize(path, true, false)
+	size, err := GetPathSize(path, true, false, false)
 
 	require.NoError(t, err)
-	require.Equal(t, int64(6), size)
+	require.Equal(t, "6B", size)
 }
 
 func TestFormatSize_NoHidden(t *testing.T) {
 	path := "testdata/.hidden_dir"
 
-	size, err := GetPathSize(path, true, false)
+	size, err := GetPathSize(path, true, false, false)
 
 	require.NoError(t, err)
-	require.Equal(t, int64(6), size)
+	require.Equal(t, "6B", size)
 }
 
 func TestFormatSize_Hidden(t *testing.T) {
 	path := "testdata/.hidden_dir"
 
-	size, err := GetPathSize(path, false, false)
+	size, err := GetPathSize(path, false, false, false)
 
 	require.NoError(t, err)
-	require.Equal(t, int64(3), size)
+	require.Equal(t, "3B", size)
 }
 
 func TestFormatSize_NoHidden_NoRecursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, false, false)
+	size, err := GetPathSize(path, false, false, false)
 	require.NoError(t, err)
-	require.Equal(t, int64(3), size)
+	require.Equal(t, "3B", size)
 }
 
 func TestFormatSize_Hidden_NoRecursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, true, false)
+	size, err := GetPathSize(path, true, false, false)
 	require.NoError(t, err)
-	require.Equal(t, int64(6), size)
+	require.Equal(t, "6B", size)
 }
 
 func TestFormatSize_NoHidden_Recursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, false, true)
+	size, err := GetPathSize(path, false, true, false)
 	require.NoError(t, err)
-	require.Equal(t, int64(6), size)
+	require.Equal(t, "6B", size)
 }
 
 func TestFormatSize_Hidden_Recursive(t *testing.T) {
 	path := "testdata/recursive_dir"
 
-	size, err := GetPathSize(path, true, true)
+	size, err := GetPathSize(path, true, true, false)
 	require.NoError(t, err)
-	require.Equal(t, int64(18), size)
+	require.Equal(t, "18B", size)
 }

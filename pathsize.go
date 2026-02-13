@@ -13,7 +13,7 @@ import (
 // If path is a directory, it sums file sizes inside.
 // Flag a includes hidden files.
 // Flag r enables recursive traversal.
-func GetPathSize(path string, a bool, r bool) (int64, error) {
+func GetPathSize(path string, a bool, r bool, h bool) (string, error) {
 
 	var total int64
 
@@ -48,7 +48,7 @@ func GetPathSize(path string, a bool, r bool) (int64, error) {
 		return nil
 	})
 
-	return total, err
+	return FormatSize(total, h), err
 }
 
 // FormatSize returns the size of a file as a string.

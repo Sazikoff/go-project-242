@@ -14,44 +14,38 @@ import (
 func main() {
 	cmd := &cli.Command{
 		Usage: "print size of a file or directory; supports -r (recursive), -H (human-readable), -a (include hidden)",
-		
-		Flags: []cli.Flag{
-            &cli.BoolFlag{
-                Name:  "human",
-				Aliases: []string{"H"},
-                Value: false,
-                Usage: "human-readable sizes (auto-select unit)",
-            },
-			
-            &cli.BoolFlag{
-                Name:  "all",
-				Aliases: []string{"a"},
-                Value: false,
-                Usage: "include hidden files and directories",
-            },
-			
-            &cli.BoolFlag{
-                Name:  "recursive",
-				Aliases: []string{"r"},
-                Value: false,
-                Usage: "recursive size of directories",
-            },
-			
 
+		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name:    "human",
+				Aliases: []string{"H"},
+				Value:   false,
+				Usage:   "human-readable sizes (auto-select unit)",
+			},
+
+			&cli.BoolFlag{
+				Name:    "all",
+				Aliases: []string{"a"},
+				Value:   false,
+				Usage:   "include hidden files and directories",
+			},
+
+			&cli.BoolFlag{
+				Name:    "recursive",
+				Aliases: []string{"r"},
+				Value:   false,
+				Usage:   "recursive size of directories",
+			},
 		},
 		Action: func(_ context.Context, cmd *cli.Command) error {
 			if cmd.NArg() == 0 {
 				return fmt.Errorf("path is required")
 			}
 
-			
 			path := cmd.Args().Get(0)
-			size,_ := code.GetPathSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
+			size, _ := code.GetPathSize(path, cmd.Bool("all"), cmd.Bool("recursive"), cmd.Bool("human"))
 
-			
-			sizeStr := code.FormatSize(size, cmd.Bool("human"))
-
-			fmt.Printf("%s	%s\n", sizeStr, path)
+			fmt.Printf("%s	%s\n", size, path)
 
 			return nil
 		},
