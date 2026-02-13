@@ -66,7 +66,7 @@ func FormatSize(size int64, h bool) string {
 	}
 
 	s := fmt.Sprintf("%.1f", i)
-	// s = strings.TrimSuffix(s, ".0")
+	s = strings.TrimSuffix(s, ".0")
 
 	switch count {
 	case 1:
