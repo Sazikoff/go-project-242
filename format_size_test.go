@@ -1,14 +1,13 @@
 package code
 
 import (
-
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestFormatSize_NoHuman(t *testing.T) {
-	result := FormatSize(123, false)
+	result := formatSize(123, false)
 	require.Equal(t, "123B", result)
 }
 
@@ -30,9 +29,8 @@ func TestFormatSize_Human(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := FormatSize(tt.size, true)
+			got := formatSize(tt.size, true)
 			require.Equal(t, tt.want, got)
 		})
 	}
 }
-

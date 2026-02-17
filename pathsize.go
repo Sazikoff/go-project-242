@@ -48,13 +48,13 @@ func GetPathSize(path string, r bool, h bool, a bool) (string, error) {
 		return nil
 	})
 
-	return FormatSize(total, h), err
+	return formatSize(total, h), err
 }
 
-// FormatSize returns the size of a file as a string.
+// formatSize returns the size of a file as a string.
 // If h = true, it formats the size in a human-readable way (KB, MB, GB, etc.),
 // otherwise it just shows the size in bytes with "B" suffix.
-func FormatSize(size int64, h bool) string {
+func formatSize(size int64, h bool) string {
 	if !h {
 		return fmt.Sprintf("%dB", size)
 	}
